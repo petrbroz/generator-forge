@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Petr Broz",
+      "authorEmail": "petr.broz@autodesk.com",
+      "authorUrl": "https://forge.autodesk.com/author/petr-broz"
+    }
+  }
+}
