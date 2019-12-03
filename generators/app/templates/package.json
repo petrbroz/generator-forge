@@ -1,0 +1,19 @@
+{
+  "name": "<%= project_name %>",
+  "version": "0.0.1",
+  "description": "<%= project_desc %>",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "autodesk",
+    "forge",
+    "express"
+  ],
+  "author": "<%= author_name %> <<%= author_email %>>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "forge-server-utils": "^8.0.8"
+  }
+}

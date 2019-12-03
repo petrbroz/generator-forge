@@ -1,0 +1,62 @@
+$(async function () {
+    const viewer = await initViewer(document.getElementById('viewer'));
+    const models = await getModels();
+    const $models = $('#models');
+    debugger;
+    $models.on('change', function () {
+        openDocument(viewer, $models.val());
+    });
+    for (const model of models) {
+        $models.append(`<option value="${model.urn}">${model.name}</option>`);
+    }
+    openDocument(viewer, $models.val());
+});
+
+// Load list of viewable models
+async function getModels() {
+    const resp = await fetch('/api/data/models');
+    if (!resp.ok) {
+        throw new  Error(await resp.text());
+    }
+    const models = await resp.json();
+    return models;
+}
+
+// Get access token for the viewer
+async function getAccessToken() {
+    const resp = await fetch('/api/auth/token');
+    if (!resp.ok) {
+        throw new  Error(await resp.text());
+    }
+    const token = await resp.json();
+    return token;
+}
+
+// Initialize the viewer
+async function initViewer(container) {
+    return new Promise(function (resolve, reject) {
+        const options = {
+            env: 'AutodeskProduction',
+            getAccessToken: async function (callback) {
+                const token = await getAccessToken();
+                callback(token.access_token, token.expires_in);
+            }
+        };
+        Autodesk.Viewing.Initializer(options, () => {
+            const viewer = new Autodesk.Viewing.GuiViewer3D(container);
+            viewer.start();
+            resolve(viewer);
+        });
+    });
+}
+
+// Open viewable model
+function openDocument(viewer, urn) {
+    function onDocumentLoadSuccess(doc) {
+        viewer.loadDocumentNode(doc, doc.getRoot().getDefaultGeometry());
+    }
+    function onDocumentLoadFailure(code) {
+        console.error(`Could not load document (code: ${code}).`);
+    }
+    Autodesk.Viewing.Document.load('urn:' + urn, onDocumentLoadSuccess, onDocumentLoadFailure);
+}

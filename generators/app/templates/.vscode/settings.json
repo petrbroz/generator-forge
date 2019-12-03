@@ -1,0 +1,10 @@
+{
+    "autodesk.forge.environments": [
+        {
+            "title": "Default",
+            "clientId": "<%= forge_client_id %>",
+            "clientSecret": "<%= forge_client_secret %>",
+            "region": "US"
+        }
+    ]
+}
