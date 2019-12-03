@@ -5,6 +5,7 @@ node_js:
 deploy:
   provider: npm
   email: $NPM_EMAIL
-  api_token: $NPM_AUTH_TOKEN
+  api_key: $NPM_AUTH_TOKEN
+  skip_cleanup: true
   on:
     tags: true

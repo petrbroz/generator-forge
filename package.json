@@ -1,6 +1,6 @@
 {
   "name": "generator-forge",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Generator of Autodesk Forge server applications.",
   "homepage": "https://github.com/petrbroz/generator-forge",
   "author": {
