@@ -1,9 +1,11 @@
 language: node_js
 node_js:
-  - 12.13.1
-  - v13
-  - v12
-  - v10
-  - v8
-  - v6
-  - v4
+  - lts/*
+
+deploy:
+  provider: npm
+  email: $NPM_EMAIL
+  api_key: $NPM_AUTH_TOKEN
+  skip_cleanup: true
+  on:
+    tags: true
