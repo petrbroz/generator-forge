@@ -31,7 +31,7 @@ MIT © [Petr Broz](https://forge.autodesk.com/author/petr-broz)
 
 [npm-image]: https://badge.fury.io/js/generator-forge.svg
 [npm-url]: https://npmjs.org/package/generator-forge
-[travis-image]: https://travis-ci.com/petrbroz/generator-forge.svg?branch=master
-[travis-url]: https://travis-ci.com/petrbroz/generator-forge
+[travis-image]: https://travis-ci.org/petrbroz/generator-forge.svg?branch=master
+[travis-url]: https://travis-ci.org/petrbroz/generator-forge
 [daviddm-image]: https://david-dm.org/petrbroz/generator-forge.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/petrbroz/generator-forge
