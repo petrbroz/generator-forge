@@ -2,21 +2,24 @@ $(async function () {
     const viewer = await initViewer(document.getElementById('viewer'));
     const models = await getModels();
     const $models = $('#models');
-    debugger;
     $models.on('change', function () {
-        openDocument(viewer, $models.val());
+        openModel(viewer, $models.val());
     });
-    for (const model of models) {
-        $models.append(`<option value="${model.urn}">${model.name}</option>`);
+    for (const [bucketKey, bucketModels] of Object.entries(models)) {
+        const $group = $(`<optgroup label="${bucketKey}"></optgroup>`);
+        for (const model of bucketModels) {
+            $group.append(`<option value="${model.urn}">${model.name}</option>`);
+        }
+        $models.append($group);
     }
-    openDocument(viewer, $models.val());
+    openModel(viewer, $models.val()); // Open the currently selected model
 });
 
 // Load list of viewable models
 async function getModels() {
     const resp = await fetch('/api/data/models');
     if (!resp.ok) {
-        throw new  Error(await resp.text());
+        throw new Error(await resp.text());
     }
     const models = await resp.json();
     return models;
@@ -26,7 +29,7 @@ async function getModels() {
 async function getAccessToken() {
     const resp = await fetch('/api/auth/token');
     if (!resp.ok) {
-        throw new  Error(await resp.text());
+        throw new Error(await resp.text());
     }
     const token = await resp.json();
     return token;
@@ -51,12 +54,14 @@ async function initViewer(container) {
 }
 
 // Open viewable model
-function openDocument(viewer, urn) {
+function openModel(viewer, urn) {
     function onDocumentLoadSuccess(doc) {
         viewer.loadDocumentNode(doc, doc.getRoot().getDefaultGeometry());
     }
     function onDocumentLoadFailure(code) {
         console.error(`Could not load document (code: ${code}).`);
     }
-    Autodesk.Viewing.Document.load('urn:' + urn, onDocumentLoadSuccess, onDocumentLoadFailure);
+    if (urn) {
+        Autodesk.Viewing.Document.load('urn:' + urn, onDocumentLoadSuccess, onDocumentLoadFailure);
+    }
 }
