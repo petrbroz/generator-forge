@@ -43,11 +43,6 @@ module.exports = class extends Generator {
         message: 'Forge client secret'
       },
       {
-        type: 'input',
-        name: 'forge_bucket',
-        message: 'Forge bucket'
-      },
-      {
         type: 'confirm',
         name: 'vscode',
         message: 'Would you like to setup Visual Studio Code?',

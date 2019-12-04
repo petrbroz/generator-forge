@@ -14,8 +14,7 @@
             "program": "${workspaceFolder}/server.js",
             "env": {
                 "FORGE_CLIENT_ID": "<%= forge_client_id %>",
-                "FORGE_CLIENT_SECRET": "<%= forge_client_secret %>",
-                "FORGE_BUCKET": "<%= forge_bucket %>"
+                "FORGE_CLIENT_SECRET": "<%= forge_client_secret %>"
             }
         }
     ]
